@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -8,7 +8,7 @@ module.exports = {
 		// interaction.guild is the object representing the Guild in which the command was run
 		await interaction.reply({ 
 			content: `This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`,
-			ephemeral: true
+			flags: MessageFlags.Ephemeral
 		});
 	},
 };

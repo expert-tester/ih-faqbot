@@ -42,8 +42,63 @@
         "id": 8,
         "question": "1",
         "answer": "1"
+      },
+      {
+        "id": 9,
+        "question": "dinner lunch",
+        "answer": "I am the power"
+      },
+      {
+        "id": 10,
+        "question": "What is a hackathon?",
+        "answer": "A hackathon is an event where participants collaborate intensively to build innovative solutions in a short time frame."
+      },
+      {
+        "id": 11,
+        "question": "Who can participate?",
+        "answer": "Anyone with a passion for technology, innovation, or problem-solving can participate, regardless of skill level."
+      },
+      {
+        "id": 12,
+        "question": "Is there a registration fee?",
+        "answer": "No, participation is completely free!"
+      },
+      {
+        "id": 13,
+        "question": "What should I bring?",
+        "answer": "Bring your laptop, chargers, valid ID, and lots of energy!"
+      },
+      {
+        "id": 14,
+        "question": "Can I participate solo?",
+        "answer": "Yes, you can join as a solo participant or form a team of up to 4 members."
+      },
+      {
+        "id": 15,
+        "question": "Are meals provided?",
+        "answer": "Yes, we provide meals, snacks, and beverages throughout the event."
+      },
+      {
+        "id": 16,
+        "question": "Will there be Wi-Fi?",
+        "answer": "Yes, high-speed Wi-Fi will be available at the venue."
+      },
+      {
+        "id": 17,
+        "question": "Are there any prizes?",
+        "answer": "Yes, winners will receive exciting prizes and goodies!"
+      },
+      {
+        "id": 18,
+        "question": "Do I need prior experience?",
+        "answer": "No prior experience is required—just enthusiasm and curiosity!"
+      },
+      {
+        "id": 19,
+        "question": "How do I submit my project?",
+        "answer": "All submissions must be uploaded on Devpost before the deadline."
       }
     ]
   },
-  "nextId": 9
+  "nextId": 20
 }

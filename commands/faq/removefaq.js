@@ -15,7 +15,7 @@ module.exports = {
         const { entry, category } = client.findFaqEntry(id);
         
         if (!entry) {
-            await interaction.reply({ content: `❌ FAQ with ID ${id} not found.`, ephemeral: true });
+            await interaction.reply({ content: `❌ FAQ with ID ${id} not found.`, flags: MessageFlags.Ephemeral });
             return;
         }
         
@@ -31,7 +31,7 @@ module.exports = {
         
         await interaction.reply({
             content: `✅ FAQ with ID ${id} removed successfully.`,
-            ephemeral: true
+            flags: MessageFlags.Ephemeral
         });
     },
 };

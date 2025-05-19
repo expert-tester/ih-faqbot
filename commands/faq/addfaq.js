@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -40,7 +40,7 @@ module.exports = {
 
         await interaction.reply({
             content: `✅ FAQ added successfully!\n**Category:** ${category}\n**Question:** ${question}\n**ID:** ${newEntry.id}`,
-            ephemeral: true
+            flags: MessageFlags.Ephemeral
         });
     },
 };

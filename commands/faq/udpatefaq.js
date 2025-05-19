@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,7 +31,7 @@ module.exports = {
         const { entry, category } = client.findFaqEntry(id);
         
         if (!entry) {
-            await interaction.reply({ content: `❌ FAQ with ID ${id} not found.`, ephemeral: true });
+            await interaction.reply({ content: `❌ FAQ with ID ${id} not found.`, flags: MessageFlags.Ephemeral });
             return;
         }
         
@@ -60,7 +60,7 @@ module.exports = {
         
         await interaction.reply({
             content: `✅ FAQ updated successfully!\n**ID:** ${id}\n**Category:** ${newCategory || category}\n**Question:** ${entry.question}`,
-            ephemeral: true
+            flags: MessageFlags.Ephemeral
         });
     },
 };

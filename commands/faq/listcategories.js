@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -10,7 +10,7 @@ module.exports = {
         const categories = Object.keys(client.faqDatabase.categories);
         
         if (categories.length === 0) {
-            await interaction.reply({ content: 'No FAQ categories found.', ephemeral: true });
+            await interaction.reply({ content: 'No FAQ categories found.', flags: MessageFlags.Ephemeral });
             return;
         }
         
@@ -23,6 +23,6 @@ module.exports = {
             )
             .setTimestamp();
         
-        await interaction.reply({ embeds: [embed], ephemeral: true });
+        await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     },
 };
