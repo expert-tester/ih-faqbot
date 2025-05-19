@@ -8,6 +8,40 @@ const { token } = require('./config.json');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
+client.faqDatabase = { categories: {}, nextId: 1 };
+
+// Database file path
+const DB_PATH = path.join(__dirname, 'faq_database.json');
+
+// Load FAQ database if exists
+if (fs.existsSync(DB_PATH)) {
+    try {
+        const data = fs.readFileSync(DB_PATH, 'utf8');
+        client.faqDatabase = JSON.parse(data);
+    } catch (err) {
+        console.error('Error loading FAQ database:', err);
+    }
+}
+
+// Save the FAQ database function for use throughout the app
+client.saveDatabase = function() {
+    try {
+        fs.writeFileSync(DB_PATH, JSON.stringify(client.faqDatabase, null, 2), 'utf8');
+    } catch (err) {
+        console.error('Error saving FAQ database:', err);
+    }
+};
+
+// Helper function for finding FAQ entries by ID
+client.findFaqEntry = function(id) {
+    for (const category in this.faqDatabase.categories) {
+        const entry = this.faqDatabase.categories[category].find(faq => faq.id === id);
+        if (entry) {
+            return { entry, category };
+        }
+    }
+    return { entry: null, category: null };
+};
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
