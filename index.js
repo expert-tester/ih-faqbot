@@ -4,14 +4,14 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-// Create a new client instance
+// Initialize Discord Client with necessary intents
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 client.faqDatabase = { categories: {}, nextId: 1 };
 
 // Database file path
-const DB_PATH = path.join(__dirname, 'faq_database.json');
+const DB_PATH = path.join(__dirname, '/commands/faq/faq_database/faq_database.json');
 
 // Load FAQ database if exists
 if (fs.existsSync(DB_PATH)) {
