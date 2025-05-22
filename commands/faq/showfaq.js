@@ -68,7 +68,7 @@ module.exports = {
         // Add fields for each FAQ
         currentPageEntries.forEach(entry => {
             embed.addFields(
-                { name: `${entry.question}`, value: `**Answer:** ${entry.answer}\n**Category:** ${entry.category}` }
+                { name: `${entry.question}`, value: `**Answer:** ${entry.answer}\n**Category:** ${entry.category}   **ID**: ${entry.id}` }
             );
         });
 

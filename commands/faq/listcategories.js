@@ -17,7 +17,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('FAQ Categories')
             .setDescription('Here are all available FAQ categories:')
-            .setColor('#2ecc71')
+            .setColor('#a684c4')
             .addFields(
                 { name: 'Categories', value: categories.map(cat => `• ${cat} (${client.faqDatabase.categories[cat].length} entries)`).join('\n') }
             )

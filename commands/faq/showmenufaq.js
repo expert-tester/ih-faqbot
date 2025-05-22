@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags, ButtonBuilder, ButtonStyle, ActionRowBuilder, Component } = require('discord.js');
+const { hasAdminRole } = require('./adminrolechecker');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -6,6 +7,14 @@ module.exports = {
         .setDescription('Show menu for FAQ'),
 
     async execute(interaction) {
+
+        // Check if the user has admin role
+        if (!hasAdminRole(interaction)) {
+            return interaction.reply({
+                content: '❌ You do not have permission to use this command. Only admins can use this command.',
+                flags: MessageFlags.Ephemeral
+            });
+        }
 
         // Build menu
         const menuEmbed = new EmbedBuilder()
@@ -36,6 +45,6 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(viewall, browsecategory, search);
 
-        await interaction.reply({ embeds: [menuEmbed], components: [row]});
+        await interaction.reply({ embeds: [menuEmbed], components: [row] });
     }
 }

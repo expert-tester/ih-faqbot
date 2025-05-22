@@ -1,27 +1,36 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
+const { hasAdminRole } = require('./adminrolechecker');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('addfaq')
         .setDescription('Add a new FAQ entry')
-        .addStringOption(option => 
+        .addStringOption(option =>
             option.setName('category')
                 .setDescription('The category for this FAQ')
                 .setRequired(true))
-        .addStringOption(option => 
+        .addStringOption(option =>
             option.setName('question')
                 .setDescription('The FAQ question')
                 .setRequired(true))
-        .addStringOption(option => 
+        .addStringOption(option =>
             option.setName('answer')
                 .setDescription('The answer to the FAQ question')
                 .setRequired(true)),
-    
+
     async execute(interaction) {
         const client = interaction.client;
         const category = interaction.options.getString('category');
         const question = interaction.options.getString('question');
         const answer = interaction.options.getString('answer');
+
+        // Check if the user has admin role
+        if (!hasAdminRole(interaction)) {
+            return interaction.reply({
+                content: '❌ You do not have permission to use this command. Only admins can use this command.',
+                flags: MessageFlags.Ephemeral
+            });
+        }
 
         // Initialize category if it doesn't exist
         if (!client.faqDatabase.categories[category]) {

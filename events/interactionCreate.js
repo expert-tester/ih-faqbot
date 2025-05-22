@@ -6,12 +6,8 @@ module.exports = {
 
 		// Handle Select Menu Interaction
 		if (interaction.isStringSelectMenu()) {
-			console.log('select menu');
 			if (interaction.customId === 'browsecategorymenu') {
 				const selectedCategory = interaction.values[0];
-				console.log('reach');
-				// Here you would show the FAQs for the selected category
-				// You can call your existing FAQ display function
 				const showFaqCommand = interaction.client.commands.get('showfaq');
 				await showFaqCommand.showFaqPage(interaction, selectedCategory, 1);
 			}
