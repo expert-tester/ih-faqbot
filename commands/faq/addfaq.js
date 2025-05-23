@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { hasAdminRole } = require('./adminrolechecker');
-const { logFAQCommand } = require('../events/faqLogger');
+const { logFAQCommand } = require('../../events/faqlogger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -45,13 +45,20 @@ module.exports = {
             answer
         };
 
+        // Get added values for logging
+        const addedEntry = {
+            question: question,
+            answer: answer,
+            category: category,
+            id: client.faqDatabase.nextId - 1
+        };
+
         client.faqDatabase.categories[category].push(newEntry);
         client.saveDatabase();
 
         // Logs the command usage
         await logFAQCommand(interaction, 'addfaq', {
-            question: question,
-            answer: answer
+            addedEntry: addedEntry
         });
 
         await interaction.reply({

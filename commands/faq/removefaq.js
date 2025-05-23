@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { hasAdminRole } = require('./adminrolechecker');
-const { logFAQCommand } = require('../events/faqLogger');
+const { logFAQCommand } = require('../../events/faqlogger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -29,6 +29,14 @@ module.exports = {
             return;
         }
 
+        // Get removed values for logging
+        const removedEntry = {
+            question: entry.question,
+            answer: entry.answer,
+            category: category,
+            id: id
+        };
+
         // Remove the FAQ entry
         client.faqDatabase.categories[category] = client.faqDatabase.categories[category].filter(faq => faq.id !== id);
 
@@ -41,8 +49,7 @@ module.exports = {
 
         // Logs the command usage
         await logFAQCommand(interaction, 'removefaq', {
-            question: question,
-            answer: answer
+            removedEntry: removedEntry
         });
 
         await interaction.reply({

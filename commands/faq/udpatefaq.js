@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { hasAdminRole } = require('./adminrolechecker');
-const { logFAQCommand } = require('../events/faqLogger');
+const { logFAQCommand } = require('../../events/faqlogger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -45,6 +45,14 @@ module.exports = {
             return;
         }
 
+        // Get original values for logging
+        const originalValues = {
+            question: entry.question,
+            answer: entry.answer,
+            category: category,
+            id: id
+        };
+
         // Update the fields if provided
         if (newQuestion) entry.question = newQuestion;
         if (newAnswer) entry.answer = newAnswer;
@@ -70,8 +78,13 @@ module.exports = {
 
         // Logs the command usage
         await logFAQCommand(interaction, 'updatefaq', {
-            question: question,
-            answer: answer
+            id: id,
+            before: originalValues,  // Original values
+            after: {                // Updated values
+                question: entry.question,
+                answer: entry.answer,
+                category: newCategory || category
+            }
         });
 
         await interaction.reply({
