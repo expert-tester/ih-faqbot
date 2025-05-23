@@ -2,7 +2,7 @@ const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags } = require('disc
 const fs = require('fs');
 const path = require('path');
 
-const configPath = path.join(__dirname, 'faq_database/adminRole.json');
+const configPath = path.join(__dirname, 'faq_database/admin_role.json');
 
 // Helper function to save admin role to config
 function saveAdminRole(guildId, roleId) {

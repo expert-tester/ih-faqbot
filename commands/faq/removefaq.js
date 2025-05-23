@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const { hasAdminRole } = require('./adminrolechecker');
+const { logFAQCommand } = require('../events/faqLogger');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -37,6 +38,12 @@ module.exports = {
         }
 
         client.saveDatabase();
+
+        // Logs the command usage
+        await logFAQCommand(interaction, 'removefaq', {
+            question: question,
+            answer: answer
+        });
 
         await interaction.reply({
             content: `✅ FAQ with ID ${id} removed successfully.`,
